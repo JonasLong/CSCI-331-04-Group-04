@@ -16,8 +16,14 @@ def main():
     size = get_boardsize()
     board = Board(size)
     board.print_board()
-    board.set_board([random.randint(0,9) for i in range(size**2)])
+
+    ran = [random.randint(0,9) for i in range(size**2)]
+    ran = [i%10 for i in range(size**2)] # testing
+
+    board.set_board(ran)
     board.print_board()
+
+    print(board.get_neighbors(1,0))
 
 if __name__=="__main__":
     main()

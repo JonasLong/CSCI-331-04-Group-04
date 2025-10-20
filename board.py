@@ -1,5 +1,5 @@
 from typing import Iterable
-
+from math import floor, ceil, remainder
 
 class Board:
     rows: list[list[int]]
@@ -14,7 +14,6 @@ class Board:
             for colnum in range(self.size):
                 self.rows[rownum][colnum] = iter[rownum+colnum]
                 
-
     def get_cell(self, row: int, col: int):
         return self.rows[row][col]
 
@@ -36,7 +35,7 @@ class Board:
             if (row+1) % 3 == 0:
                 row_char="═"
             else:
-                row_char="-"
+                row_char="─"
 
             if (col) % 3 == 0:
                 if (row+1) % 3 == 0:
@@ -49,8 +48,7 @@ class Board:
                 rowitem = row_char*4
 
             print(rowitem, end="")
-        print(col_intercept)
-        
+        print(col_intercept)    
 
     def _get_col_sep(self, row:int, col:int):
 
@@ -58,3 +56,17 @@ class Board:
             print(" ║ ",end="")
         else:
             print(" | ",end="")
+
+    def get_neighbors(self, row:int, col:int):
+        row_block=floor(row/3)
+        col_block=floor(col/3)
+        neighbors = []
+        for row_offset in range(3):
+            for col_offset in range(3):
+                if row_offset == row % 3 and col_offset == col %3:
+                    continue
+
+                val = self.rows[row_block*3 + row_offset][col_block*3 + col_offset]
+                neighbors.append(val)
+        return neighbors
+    
