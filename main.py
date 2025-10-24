@@ -18,12 +18,19 @@ def main():
     board.print_board()
 
     ran = [random.randint(0,9) for i in range(size**2)]
-    ran = [i%10 for i in range(size**2)] # testing
+    #ran = [i%10 for i in range(size**2)] # testing
 
     board.set_board(ran)
     board.print_board()
 
-    print(board.get_neighbors(1,0))
+    row = int(input("Enter row >"))
+    col = int(input("Enter col >"))
+
+    print(board.get_group_neighbors(row,col))
+    print(board.get_row_neighbors(row,col))
+    print(board.get_col_neighbors(row,col))
+
+    print(f"Valid:{board.validate_board()}")
 
 if __name__=="__main__":
     main()

@@ -57,7 +57,7 @@ class Board:
         else:
             print(" | ",end="")
 
-    def get_neighbors(self, row:int, col:int):
+    def get_group_neighbors(self, row:int, col:int):
         row_block=floor(row/3)
         col_block=floor(col/3)
         neighbors = []
@@ -69,4 +69,21 @@ class Board:
                 val = self.rows[row_block*3 + row_offset][col_block*3 + col_offset]
                 neighbors.append(val)
         return neighbors
-    
+
+    def get_col_neighbors(self, row:int, col:int):
+        col_neighbors = [i[col] for i in self.rows]
+        col_neighbors.pop(row)
+        return col_neighbors
+
+    def get_row_neighbors(self, row:int, col:int):
+        row_neighbors = self.rows[row][:]
+        row_neighbors.pop(col)
+        return row_neighbors
+
+    def validate_board(self):
+        for rownum, row in enumerate(self.rows):
+            for colnum, col in enumerate(row):
+                if col in self.get_group_neighbors(rownum,colnum) or col in self.get_row_neighbors(rownum,colnum) or col in self.get_col_neighbors(rownum,colnum):
+                    print(f"Validation failed for row {rownum}, col {colnum}")
+                    return False
+        return True
