@@ -9,10 +9,10 @@ class Board:
         self.size = size
         self.rows = [[0 for i in range(size)] for i in range(size)]
     
-    def set_board(self, iter):
+    def set_board(self, board: list[int]):
         for rownum in range(self.size):
             for colnum in range(self.size):
-                self.rows[rownum][colnum] = iter[rownum+colnum]
+                self.rows[rownum][colnum] = board[rownum*self.size+colnum]
                 
     def get_cell(self, row: int, col: int):
         return self.rows[row][col]
