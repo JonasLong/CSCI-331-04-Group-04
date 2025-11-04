@@ -13,22 +13,27 @@ def get_boardsize():
             return size
 
 def main():
-    size = get_boardsize()
-    board = Board(size)
-    board.print_board()
+    #size = get_boardsize()
+    board = Board(9)
 
-    ran = [random.randint(0,9) for i in range(size**2)]
+
+    bd = [ 0, 0, 9, 0, 4, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 5, 3, 1, 0,
+           0, 6, 1, 0, 0, 8, 0, 5, 0,
+           0, 0, 5, 4, 0, 0, 2, 0, 3,
+           0, 1, 0, 0, 0, 7, 0, 0, 8,
+           0, 8, 0, 0, 0, 0, 7, 6, 0,
+           3, 0, 6, 0, 1, 9, 4, 0, 0,
+           7, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 4, 0, 5, 0, 6, 2, 7 ]
     #ran = [i%10 for i in range(size**2)] # testing
 
-    board.set_board(ran)
+    board.set_board(bd)
     board.print_board()
 
-    row = int(input("Enter row >"))
-    col = int(input("Enter col >"))
 
-    print(board.get_group_neighbors(row,col))
-    print(board.get_row_neighbors(row,col))
-    print(board.get_col_neighbors(row,col))
+    board.solve_board(0, 0)
+    board.print_board()
 
     print(f"Valid:{board.validate_board()}")
 

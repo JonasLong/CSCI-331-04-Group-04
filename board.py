@@ -16,6 +16,9 @@ class Board:
                 
     def get_cell(self, row: int, col: int):
         return self.rows[row][col]
+    
+    def set_cell(self, row:int, col:int, val:int):
+        self.rows[row][col] = val
 
     def print_board(self):
         self._get_row_sep(-1)
@@ -87,3 +90,28 @@ class Board:
                     print(f"Validation failed for row {rownum}, col {colnum}")
                     return False
         return True
+    
+    def is_safe_move(self, row:int, col:int, val:int):
+        rowneb = self.get_row_neighbors(row, col)
+        colneb = self.get_col_neighbors(row, col)
+        groupneb = self.get_group_neighbors(row, col)
+
+        if val in rowneb or val in colneb or val in groupneb:
+            return False
+        return True
+    
+    def solve_board(self, row:int, col:int):
+        if row == 8 and col == 9:
+            return True
+        if col == 9:
+            row += 1
+            col = 0
+        if self.get_cell(row, col) > 0:
+            return self.solve_board(row, col +1)
+        for val in range (1, 10):
+            if self.is_safe_move(row, col, val):
+                self.set_cell(row, col, val)
+                if self.solve_board(row, col + 1):
+                    return True
+            self.set_cell(row, col, 0)
+        return False

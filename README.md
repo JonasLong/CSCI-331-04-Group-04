@@ -12,6 +12,9 @@ list of developers
 Jonas Long:
 board/cell classes, grid randomization, col/row/group neighbors, board validation
 
+Justin Guidry:
+made simple backtracking with set board
+
 ## How to run the project
 guides (steps, commands, etc.)
 
