@@ -26,29 +26,39 @@ def main():
            3, 0, 6, 0, 1, 9, 4, 0, 0,
            7, 0, 0, 0, 0, 0, 0, 0, 0,
            0, 0, 4, 0, 5, 0, 6, 2, 7 ]
-    #ran = [i%10 for i in range(size**2)] # testing
+    #bd = [i%10 for i in range(board.size**2)] # testing
 
     board.set_board(bd)
     print("Starting board:")
     board.print_board()
 
+    #print("Listing board diagonals")
+    #for i in range(9):
+    #    for j in range(9):
+    #        print(f"r={i},c={j},v={board.get_cell(i,j)}")
+    #        print(f"n={board.get_diagonal_neighbors(i,j)}")
+
     print("DFS")
     start = time()
     b1=board.solve_naieve_dfs_no_side_effects(board, 0, 0)
     end = time()
-    assert(b1 is not None)
-    b1.print_board()
-    print(f"Solve time: {end-start}s")
-    print(f"Valid: {b1.validate_board()}")
+    if b1 is None:
+        print("DFS: Board is not solveable")
+    else:
+        b1.print_board()
+        print(f"Solve time: {end-start}s")
+        print(f"Valid: {b1.validate_board()}")
 
     print("DFS with backtracking")
     start = time()
     b2=board.solve_dfs_no_side_effects(board, 0, 0)
     end = time()
-    assert(b2 is not None)
-    b2.print_board()
-    print(f"Solve time: {end-start}s")
-    print(f"Valid: {b2.validate_board()}")
+    if b2 is None:
+        print("DFS backtrack: Board is not solveable")
+    else:
+        b2.print_board()
+        print(f"Solve time: {end-start}s")
+        print(f"Valid: {b2.validate_board()}")
 
 if __name__=="__main__":
     main()
