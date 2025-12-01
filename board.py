@@ -1,6 +1,13 @@
+import math
 from typing import Iterable
 from math import floor, ceil, remainder
 from typing import Self
+
+# Consider diagonals when validating the board
+USE_DIAGONALS = False
+# If set, cells can only have diagonal neighbors when they're on the board's diagonals
+# If not set, every cell can have diagonal neighbors extending up and down the board
+ONLY_PURE_DIAGONALS = True
 
 class Board:
     rows: list[list[int]]
@@ -87,10 +94,40 @@ class Board:
         row_neighbors.pop(col)
         return row_neighbors
 
+    def get_diagonal_neighbors(self, row:int, col:int):
+        # If only_pure is set, cells can only have diagonal neighbors when they're on the board's diagonals
+        # If not set, every cell can have diagonal neighbors extending up and down the board
+        if ONLY_PURE_DIAGONALS:
+            if not (row==col or row==self.size-col):
+                return []
+
+        # left and right diagonals are the vertical halves of the X formed on the target cell
+        diag_left=[]
+        diag_right=[]
+        for (rowind, rowlst) in enumerate(self.rows):
+            if rowind == row:
+                # Don't include self in neighbor list
+                continue
+
+            offset = abs(rowind-row)
+            ldiag_col = col-offset
+            rdiag_col = col+offset
+            #print(f"diags={ldiag_col} & {rdiag_col} on c{rowind}")
+            if 0 <= ldiag_col and ldiag_col < self.size:
+                diag_left.append(rowlst[ldiag_col])
+            if 0 <= rdiag_col and rdiag_col < self.size:
+                diag_right.append(rowlst[rdiag_col])
+        diag_left.extend(diag_right)
+        return diag_left
+
+
     def validate_board(self):
         for rownum, row in enumerate(self.rows):
-            for colnum, col in enumerate(row):
-                if col in self.get_group_neighbors(rownum,colnum) or col in self.get_row_neighbors(rownum,colnum) or col in self.get_col_neighbors(rownum,colnum):
+            for colnum, val in enumerate(row):
+                if (val in self.get_group_neighbors(rownum,colnum) or 
+                    val in self.get_row_neighbors(rownum,colnum) or 
+                    val in self.get_col_neighbors(rownum,colnum) or 
+                    (USE_DIAGONALS and val in self.get_diagonal_neighbors(rownum,colnum))):
                     print(f"Validation failed for row {rownum}, col {colnum}")
                     return False
         return True
@@ -99,8 +136,12 @@ class Board:
         rowneb = self.get_row_neighbors(row, col)
         colneb = self.get_col_neighbors(row, col)
         groupneb = self.get_group_neighbors(row, col)
+        diagneb = self.get_diagonal_neighbors(row, col)
 
-        if val in rowneb or val in colneb or val in groupneb:
+        if (val in rowneb or 
+        val in colneb or 
+        val in groupneb or 
+        (USE_DIAGONALS and val in diagneb)):
             return False
         return True
 
