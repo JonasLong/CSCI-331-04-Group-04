@@ -1,5 +1,6 @@
 from typing import Iterable
 from math import floor, ceil, remainder
+from typing import Self
 
 class Board:
     rows: list[list[int]]
@@ -13,6 +14,9 @@ class Board:
         for rownum in range(self.size):
             for colnum in range(self.size):
                 self.rows[rownum][colnum] = board[rownum*self.size+colnum]
+
+    def copy_board(self, board: Self):
+        self.rows = [i[:] for i in board.rows]
                 
     def get_cell(self, row: int, col: int):
         return self.rows[row][col]
@@ -99,19 +103,58 @@ class Board:
         if val in rowneb or val in colneb or val in groupneb:
             return False
         return True
-    
-    def solve_board(self, row:int, col:int):
+
+    @classmethod
+    def solve_naieve_dfs_no_side_effects(cls, board, row:int, col:int) -> Self | None:
+        if row == 8 and col == 9:
+            return board
+        if col == 9:
+            row += 1
+            col = 0
+        if board.get_cell(row, col) > 0:
+            return cls.solve_dfs_no_side_effects(board, row, col + 1)
+        for val in range (1, 10):
+            new_board = Board(board.size)
+            #board.print_board()
+            new_board.copy_board(board)
+            #new_board.print_board()
+            new_board.set_cell(row, col, val)
+            res = cls.solve_dfs_no_side_effects(new_board, row, col + 1)
+            if res is not None:
+                return res
+        return None
+
+    def solve_dfs(self, row:int, col:int) -> bool:
         if row == 8 and col == 9:
             return True
         if col == 9:
             row += 1
             col = 0
         if self.get_cell(row, col) > 0:
-            return self.solve_board(row, col +1)
+            return self.solve_dfs(row, col + 1)
         for val in range (1, 10):
             if self.is_safe_move(row, col, val):
                 self.set_cell(row, col, val)
-                if self.solve_board(row, col + 1):
+                if self.solve_dfs(row, col + 1):
                     return True
             self.set_cell(row, col, 0)
         return False
+
+    @classmethod
+    def solve_dfs_no_side_effects(cls, board, row:int, col:int) -> Self | None:
+        if row == 8 and col == 9:
+            return board
+        if col == 9:
+            row += 1
+            col = 0
+        if board.get_cell(row, col) > 0:
+            return board.solve_dfs_no_side_effects(board, row, col + 1)
+        for val in range (1, 10):
+            if board.is_safe_move(row, col, val):
+                new_board = Board(board.size)
+                new_board.copy_board(board)
+                new_board.set_cell(row, col, val)
+                res = cls.solve_dfs_no_side_effects(new_board, row, col + 1)
+                if res is not None:
+                    return res
+        return None
