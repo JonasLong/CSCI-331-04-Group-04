@@ -14,7 +14,7 @@ def get_boardsize():
             return size
 
 def main():
-    #size = get_boardsize()
+    
     board = Board(9)
 
     board2 = Board(9)
@@ -28,7 +28,7 @@ def main():
            0, 0, 7, 0, 8, 0, 5, 0, 0,
            0, 0, 0, 4, 0, 7, 0, 0, 0,
            0, 0, 0, 0, 0, 0, 0, 0, 0 ]
-    #bd = [i%10 for i in range(board.size**2)] # testing
+    
 
     board.set_board(bd)
     board.set_domains()
@@ -38,13 +38,6 @@ def main():
     print("Starting board:")
     board.print_board()
 
-    
-
-    #print("Listing board diagonals")
-    #for i in range(9):
-    #    for j in range(9):
-    #        print(f"r={i},c={j},v={board.get_cell(i,j)}")
-    #        print(f"n={board.get_diagonal_neighbors(i,j)}")
 
     print("DFS")
     start = time()
