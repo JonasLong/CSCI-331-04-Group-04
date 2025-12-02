@@ -17,20 +17,28 @@ def main():
     #size = get_boardsize()
     board = Board(9)
 
-    bd = [ 0, 0, 9, 0, 4, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 5, 3, 1, 0,
-           0, 6, 1, 0, 0, 8, 0, 5, 0,
-           0, 0, 5, 4, 0, 0, 2, 0, 3,
-           0, 1, 0, 0, 0, 7, 0, 0, 8,
-           0, 8, 0, 0, 0, 0, 7, 6, 0,
-           3, 0, 6, 0, 1, 9, 4, 0, 0,
-           7, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 4, 0, 5, 0, 6, 2, 7 ]
+    board2 = Board(9)
+
+    bd = [ 0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 7, 0, 9, 0, 0, 0,
+           0, 0, 6, 0, 3, 0, 9, 0, 0,
+           0, 6, 0, 2, 7, 5, 0, 1, 0,
+           0, 0, 5, 9, 0, 6, 3, 0, 0,
+           0, 1, 0, 3, 4, 8, 0, 9, 0,
+           0, 0, 7, 0, 8, 0, 5, 0, 0,
+           0, 0, 0, 4, 0, 7, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0 ]
     #bd = [i%10 for i in range(board.size**2)] # testing
 
     board.set_board(bd)
+    board.set_domains()
+
+    board2.set_board(bd)
+    board2.set_domains()
     print("Starting board:")
     board.print_board()
+
+    
 
     #print("Listing board diagonals")
     #for i in range(9):
@@ -40,25 +48,20 @@ def main():
 
     print("DFS")
     start = time()
-    b1=board.solve_naieve_dfs_no_side_effects(board, 0, 0)
+    board.solve_naieve( 0, 0)
     end = time()
-    if b1 is None:
-        print("DFS: Board is not solveable")
-    else:
-        b1.print_board()
-        print(f"Solve time: {end-start}s")
-        print(f"Valid: {b1.validate_board()}")
+    board.print_board()
+    print(f"Solve time: {end-start}s")
+    print(f"Total brances explored: {board.branches}")
 
-    print("DFS with backtracking")
+    print("DFS with forward checking")
     start = time()
-    b2=board.solve_dfs_no_side_effects(board, 0, 0)
+    board2.solve_dfs( 0, 0, board.domains)
     end = time()
-    if b2 is None:
-        print("DFS backtrack: Board is not solveable")
-    else:
-        b2.print_board()
-        print(f"Solve time: {end-start}s")
-        print(f"Valid: {b2.validate_board()}")
+    board2.print_board()
+    print(f"Solve time: {end-start}s")
+    print(f"Total brances explored: {board2.branches}")
+
 
 if __name__=="__main__":
     main()
