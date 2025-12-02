@@ -62,6 +62,5 @@ def main():
     print(f"Solve time: {end-start}s")
     print(f"Total brances explored: {board2.branches}")
 
-
 if __name__=="__main__":
     main()
