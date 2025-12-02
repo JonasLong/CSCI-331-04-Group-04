@@ -209,7 +209,7 @@ class Board:
             self.set_cell(row, col, 0)
         return False
     
-    def solve_naieve(self, row, col):
+    def solve_naieve(self, row, col, domains):
         if row == 8 and col == 9:
             if self.validate_board():
                 return True
@@ -219,12 +219,14 @@ class Board:
             row += 1
             col = 0
         if self.get_cell(row, col) > 0:
-            return self.solve_naieve(row, col + 1)
+            new_domains = [i[:] for i in domains]
+            return self.solve_naieve(row, col + 1, new_domains)
         for i in range(1,10):
             if self.is_safe_move(row, col, i):
                 self.branches += 1
                 self.set_cell(row, col, i)
-                if self.solve_naieve(row, col + 1):
+                new_domains = [i[:] for i in domains]
+                if self.solve_naieve(row, col + 1, new_domains):
                     return True
             self.set_cell(row, col, 0)
         return False
