@@ -60,5 +60,19 @@ def main():
         print(f"Solve time: {end-start}s")
         print(f"Valid: {b2.validate_board()}")
 
+    print("DFS with forward checking")
+    start = time()
+    b3=board.solve_dfs_forward_checking(board, 0, 0)
+    end = time()
+    if b3 is None:
+        print("DFS forward checking: Board is not solveable")
+    else:
+        b3.print_board()
+        print(f"Solve time: {end-start}s")
+        print(f"Valid: {b3.validate_board()}")
+
+    #TODO DFS with forward checking and backtracking
+    # solve_dfs_forward_checking_and_backtracking(board,0,0)
+
 if __name__=="__main__":
     main()

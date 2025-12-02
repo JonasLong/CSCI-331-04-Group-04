@@ -199,3 +199,30 @@ class Board:
                 if res is not None:
                     return res
         return None
+
+    @classmethod
+    def solve_dfs_forward_checking(cls, board, row:int, col:int) -> Self | None:
+        # Make a 3D list for row, column, and domain, where domain is numbers 1-9
+        domains = [[list(range(1,10)) for i in range(board.size)] for i in range(board.size)]
+        print("pre-filled domain list:", domains)
+
+        # replace the domain of cells that are already filled with an empty list
+        for rowind, rowval in enumerate(board.rows):
+            for colind, val in enumerate(rowval):
+                if val > 0:
+                    # pre-filled cells have no domain
+                    domains[rowind][colind]=[]
+        print("\nupdated domains:", domains)
+
+        #TODO:
+        #given the list of domains, run a backtracking solver. Returns a valid solution board, or None if not found
+        
+
+        pass
+
+
+    @classmethod
+    def solve_dfs_forward_checking_and_backtracking(cls, board, row:int, col:int) -> Self | None:
+        # Like the above function, but include the is_safe_move() backtracking
+        pass
+
