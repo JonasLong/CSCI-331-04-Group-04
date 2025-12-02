@@ -41,7 +41,7 @@ def main():
 
     print("DFS")
     start = time()
-    board.solve_naieve( 0, 0)
+    board.solve_naieve( 0, 0, board.domains)
     end = time()
     board.print_board()
     print(f"Solve time: {end-start}s")
@@ -49,7 +49,7 @@ def main():
 
     print("DFS with forward checking")
     start = time()
-    board2.solve_dfs( 0, 0, board.domains)
+    board2.solve_dfs( 0, 0, board2.domains)
     end = time()
     board2.print_board()
     print(f"Solve time: {end-start}s")
