@@ -13,21 +13,18 @@ def get_boardsize():
         if size % 3 == 0:
             return size
 
+def load_board():
+    with open("data/board.txt") as b:
+        bd= "".join(b.readlines()).replace(" ","").split(",")
+        return [int(cell) for cell in bd]
+
 def main():
     
     board = Board(9)
 
     board2 = Board(9)
 
-    bd = [ 0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 7, 0, 9, 0, 0, 0,
-           0, 0, 6, 0, 3, 0, 9, 0, 0,
-           0, 6, 0, 2, 7, 5, 0, 1, 0,
-           0, 0, 5, 9, 0, 6, 3, 0, 0,
-           0, 1, 0, 3, 4, 8, 0, 9, 0,
-           0, 0, 7, 0, 8, 0, 5, 0, 0,
-           0, 0, 0, 4, 0, 7, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    bd = load_board() 
     
 
     board.set_board(bd)
