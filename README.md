@@ -7,10 +7,10 @@ This project generates a random sudoku board and solves it, using both a naieve 
 
 ## Developers
 Jonas Long:
-board/cell classes, grid randomization, col/row/group neighbors, board validation, naieve algorithm, backtracking
+board/cell classes, grid randomization, col/row/group neighbors, board validation, naieve algorithm, backtracking, presentation
 
 Justin Guidry:
-made simple backtracking with set board, implemented forward checking, optimizations
+made simple backtracking with set board, implemented forward checking, optimizations, presentation
 
 ## How to run the project
-run `python main.py`
+run `python code/main.py`
