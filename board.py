@@ -199,13 +199,12 @@ class Board:
                 return False
             return self.solve_dfs(row, col + 1, new_domain)
         for val in domains[row*self.size + col]:
-            if self.is_safe_move(row, col, val):
-                new_domain = self.update_domains(row, col, val, domains)
-                if new_domain:
-                    self.set_cell(row, col, val)
-                    self.branches += 1
-                    if self.solve_dfs(row, col + 1, new_domain):
-                        return True
+            new_domain = self.update_domains(row, col, val, domains)
+            if new_domain:
+                self.set_cell(row, col, val)
+                self.branches += 1
+                if self.solve_dfs(row, col + 1, new_domain):
+                    return True
             self.set_cell(row, col, 0)
         return False
     
