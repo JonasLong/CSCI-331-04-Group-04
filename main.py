@@ -41,7 +41,7 @@ def main():
 
     print("DFS")
     start = time()
-    board.solve_naieve( 0, 0, board.domains)
+    board.solve_naive( 0, 0, board.domains)
     end = time()
     board.print_board()
     print(f"Solve time: {end-start}s")

@@ -167,7 +167,7 @@ class Board:
         return True
 
     @classmethod
-    def solve_naieve_dfs_no_side_effects(cls, board, row:int, col:int) -> Self | None:
+    def solve_naive_dfs_no_side_effects(cls, board, row:int, col:int) -> Self | None:
         if row == 8 and col == 9:
             if board.validate_board():
                 return board
@@ -177,14 +177,14 @@ class Board:
             row += 1
             col = 0
         if board.get_cell(row, col) > 0:
-            return cls.solve_naieve_dfs_no_side_effects(board, row, col + 1)
+            return cls.solve_naive_dfs_no_side_effects(board, row, col + 1)
         for val in range (1, 10):
             new_board = Board(board.size)
             #board.print_board()
             new_board.copy_board(board)
             #new_board.print_board()
             new_board.set_cell(row, col, val)
-            res = cls.solve_naieve_dfs_no_side_effects(new_board, row, col + 1)
+            res = cls.solve_naive_dfs_no_side_effects(new_board, row, col + 1)
         return None
 
     def solve_dfs(self, row:int, col:int, domains) -> bool:
@@ -209,7 +209,7 @@ class Board:
             self.set_cell(row, col, 0)
         return False
     
-    def solve_naieve(self, row, col, domains):
+    def solve_naive(self, row, col, domains):
         if row == 8 and col == 9:
             if self.validate_board():
                 return True
@@ -220,13 +220,13 @@ class Board:
             col = 0
         if self.get_cell(row, col) > 0:
             new_domains = [i[:] for i in domains]
-            return self.solve_naieve(row, col + 1, new_domains)
+            return self.solve_naive(row, col + 1, new_domains)
         for i in range(1,10):
             if self.is_safe_move(row, col, i):
                 self.branches += 1
                 self.set_cell(row, col, i)
                 new_domains = [i[:] for i in domains]
-                if self.solve_naieve(row, col + 1, new_domains):
+                if self.solve_naive(row, col + 1, new_domains):
                     return True
             self.set_cell(row, col, 0)
         return False
