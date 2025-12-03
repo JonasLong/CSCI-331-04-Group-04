@@ -1,6 +1,6 @@
 # CSCI-331-04-Group-04
 
-# SudokuCSP Solver
+# Customized Sudoku
 
 ## Abstract
 This project generates a random sudoku board and solves it, using both a naieve Depth-First-Search algorithm and a more advanced search that uses Constraint Satisfaction Problem to prune invalid states with backtracking and forward checking
