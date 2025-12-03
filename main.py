@@ -45,7 +45,7 @@ def main():
     end = time()
     board.print_board()
     print(f"Solve time: {end-start}s")
-    print(f"Total brances explored: {board.branches}")
+    print(f"Total branches explored: {board.branches}")
 
     print("DFS with forward checking")
     start = time()
@@ -53,7 +53,7 @@ def main():
     end = time()
     board2.print_board()
     print(f"Solve time: {end-start}s")
-    print(f"Total brances explored: {board2.branches}")
+    print(f"Total branches explored: {board2.branches}")
 
 if __name__=="__main__":
     main()
