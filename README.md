@@ -7,7 +7,7 @@ This project generates a random sudoku board and solves it, using both a naive D
 
 ## Developers
 Jonas Long:
-Board/cell classes, grid randomization, col/row/group neighbors, board validation, naieve algorithm, backtracking, and presentation
+Board/cell classes, grid randomization, col/row/group neighbors, board validation, naive algorithm, backtracking, and presentation
 
 Justin Guidry:
 Made simple backtracking with set board, implemented forward checking, optimizations, and presentation
