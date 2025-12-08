@@ -3,7 +3,7 @@
 # Customized Sudoku
 
 ## Abstract
-This project generates a random sudoku board and solves it, using both a naieve Depth-First-Search algorithm and a more advanced search that uses Constraint Satisfaction Problem to prune invalid states with forward checking
+This project generates a random sudoku board and solves it, using both a naive Depth-First-Search algorithm and a more advanced search that uses Constraint Satisfaction Problem solving strategies to prune invalid states with forward checking
 
 ## Developers
 Jonas Long:
