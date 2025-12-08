@@ -1,4 +1,4 @@
-# CSCI-331-04-Group-04
+# CSCI-331-04-Group-01
 
 # Customized Sudoku
 
