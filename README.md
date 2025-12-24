@@ -1,5 +1,5 @@
 # Customized Sudoku
-Final project for CSCI-331-04
+Final project for CSCI-331-04. Presentation slides are available [here](resources/AI%20project%20presentation.pdf).
 
 ## Abstract
 This project generates a random sudoku board and solves it, using both a naive Depth-First-Search algorithm and a more advanced search that uses Constraint Satisfaction Problem solving strategies to prune invalid states with forward checking
